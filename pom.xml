@@ -1,159 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.apache.maven.archetypes</groupId>
-  <artifactId>maven-archetype-quickstart</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
-
-  <profiles>
-    <profile>
-      <id>dev</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-        <property>
-          <name>profile.target</name>
-          <value>dev</value>
-        </property>
-      </activation>
-      <properties>
-        <project.build.finalWarName>myapp</project.build.finalWarName>
-        <project.build.failOnMissingWebXml>false</project.build.failOnMissingWebXml>
-        <project.build.excludePackages>
-          WEB-INF/bin/**,
-          WEB-INF/database/*.db2,
-          WEB-INF/database/*.oracle,
-          WEB-INF/database/*.sqlserver,
-          WEB-INF/lib/*freebsd*.so,
-          WEB-INF/lib/*aix*.so,
-          WEB-INF/lib/*solaris*.so,
-          WEB-INF/lib/*hpux*.*,
-          WEB-INF/lib/*ia64*.so,
-          WEB-INF/lib/*ppc*.so,
-          WEB-INF/lib/*ppc64*.so,
-          WEB-INF/lib/*macosx.*,
-          WEB-INF/lib/sigar-*-winnt.*
-        </project.build.excludePackages>
-        <project.build.archiveClassesToJar>true</project.build.archiveClassesToJar>
-
-        <!-- Placeholder values — replace with actual artifact details if needed -->
-        <sailpoint.release.groupid>com.example</sailpoint.release.groupid>
-        <sailpoint.release.artifactid>example-release</sailpoint.release.artifactid>
-        <sailpoint.release.version>1.0.0</sailpoint.release.version>
-
-        <sailpoint.patch.groupid>com.example</sailpoint.patch.groupid>
-        <sailpoint.patch.artifactid>example-patch</sailpoint.patch.artifactid>
-        <sailpoint.patch.version>1.0.0</sailpoint.patch.version>
-      </properties>
-    </profile>
-  </profiles>
-
-  <build>
-    <finalName>${project.build.finalWarName}</finalName>
-    <plugins>
-      <plugin>
-        <groupId>de.whisperedshouts</groupId>
-        <artifactId>iiqentities-maven-plugin</artifactId>
-        <version>1.0.0</version> <!-- Placeholder: change if real version is known -->
-        <executions>
-          <execution>
-            <id>copy-resources</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>generate-xml</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/config/custom-artifacts</outputDirectory>
-              <xmlEntityFile>custom_iiqObjects.xml</xmlEntityFile>
-              <tokenFile>${basedir}/src/main/resources/tokens.properties</tokenFile>
-              <entityFolder>${basedir}/src/main/entities</entityFolder>
-              <createImportCommandXml>false</createImportCommandXml>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>2.7</version>
-        <executions>
-          <execution>
-            <id>copy-webapp-resources</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>src/main/webapp</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>copy-classes-resources</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>src/main/resources</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.3.2</version>
-        <configuration>
-          <includeEmptyDirectories>true</includeEmptyDirectories>
-          <warSourceDirectory>${project.build.directory}/${project.artifactId}-${project.version}</warSourceDirectory>
-          <packagingExcludes>${project.build.excludePackages}</packagingExcludes>
-          <archiveClasses>${project.build.archiveClassesToJar}</archiveClasses>
-          <failOnMissingWebXml>${project.build.failOnMissingWebXml}</failOnMissingWebXml>
-          <overlays>
-            <overlay></overlay>
-            <overlay>
-              <groupId>${sailpoint.patch.groupid}</groupId>
-              <artifactId>${sailpoint.patch.artifactid}</artifactId>
-            </overlay>
-            <overlay>
-              <groupId>${sailpoint.release.groupid}</groupId>
-              <artifactId>${sailpoint.release.artifactid}</artifactId>
-            </overlay>
-          </overlays>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
-  <dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>org.apache.maven.archetypes</groupId>
+<artifactId>maven-archetype-quickstart</artifactId>
+<version>1.0-SNAPSHOT</version>
+<packaging>war</packaging>
+<properties>
+<project.build.finalWarName>myapp</project.build.finalWarName>
+<project.build.failOnMissingWebXml>false</project.build.failOnMissingWebXml>
+<project.build.excludePackages> WEB-INF/bin/**, WEB-INF/lib/*macosx.*, WEB-INF/lib/sigar-*-winnt.* </project.build.excludePackages>
+<project.build.archiveClassesToJar>true</project.build.archiveClassesToJar>
+</properties>
+<build>
+<finalName>${project.build.finalWarName}</finalName>
+<plugins>
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-war-plugin</artifactId>
+<version>3.3.2</version>
+<configuration>
+<includeEmptyDirectories>true</includeEmptyDirectories>
+<warSourceDirectory>${project.build.directory}/${project.artifactId}-${project.version}</warSourceDirectory>
+<packagingExcludes>${project.build.excludePackages}</packagingExcludes>
+<archiveClasses>${project.build.archiveClassesToJar}</archiveClasses>
+<failOnMissingWebXml>${project.build.failOnMissingWebXml}</failOnMissingWebXml>
+<overlays>
+<overlay/>
+</overlays>
+</configuration>
+</plugin>
+</plugins>
+</build>
+<dependencies>
+<!--  Add any required dependencies here  -->
+<!--  Example:
     <dependency>
-      <groupId>${sailpoint.release.groupid}</groupId>
-      <artifactId>${sailpoint.release.artifactid}</artifactId>
-      <version>${sailpoint.release.version}</version>
-      <type>war</type>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>${sailpoint.patch.groupid}</groupId>
-      <artifactId>${sailpoint.patch.artifactid}</artifactId>
-      <version>${sailpoint.patch.version}</version>
-      <type>war</type>
-    </dependency>
-  </dependencies>
+     -->
+</dependencies>
 </project>
