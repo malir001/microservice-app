@@ -1,8 +1,6 @@
 pipeline {
   agent any
-  tools {
-  maven 'Maven 3.8.7'
-    }
+  
   environment {
     AWS_REGION = 'ap-south-1'
     ECR_REPO = '203918866361.dkr.ecr.ap-south-1.amazonaws.com/myapp'
