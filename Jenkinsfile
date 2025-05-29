@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/youruser/microservice-app.git'
+        git url: 'https://github.com/malir001/microservice-app.git'
         echo "stage checkout done"
       }
     }
