@@ -1,11 +1,14 @@
-# Use Tomcat base image
-FROM tomcat:9.0
+# Use a lightweight OpenJDK base image
+FROM openjdk:17-jdk-slim
 
-# Remove default webapps (optional)
-RUN rm -rf /usr/local/tomcat/webapps/*
+# Set the working directory
+WORKDIR /app
 
-# Copy WAR file into Tomcat
-COPY target/*.war /usr/local/tomcat/webapps/myapp.war
+# Copy the JAR file into the container
+COPY target/microservice-app-1.0.0.jar app.jar
 
-# Expose Tomcat port
+# Expose the application port (change if your app runs on a different port)
 EXPOSE 8080
+
+# Run the JAR file
+ENTRYPOINT ["java", "-jar", "app.jar"]
