@@ -1,14 +1,14 @@
 # Use a lightweight OpenJDK base image
 FROM openjdk:17-jdk-slim
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy the JAR file into the container
+# Copy the fat/shaded JAR file into the container
 COPY target/microservice-app-1.0.0.jar app.jar
 
-# Expose the application port (change if your app runs on a different port)
-EXPOSE 8080
+# Expose the application port
+EXPOSE 9000
 
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run the JAR file using main class
+ENTRYPOINT ["java", "-cp", "app.jar", "com.growingflowers.app.App"]
