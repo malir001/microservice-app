@@ -1,14 +1,14 @@
-# Use a lightweight OpenJDK base image
+# Base image
 FROM openjdk:17-jdk-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy the fat/shaded JAR file into the container
+# Copy fat jar
 COPY target/microservice-app-1.0.0.jar app.jar
 
-# Expose the application port
+# Expose port 9000
 EXPOSE 9000
 
-# Run the JAR file using main class
-ENTRYPOINT ["java", "-cp", "app.jar", "com.growingflowers.app.App"]
+# Run jar (Main-Class will be read from manifest)
+ENTRYPOINT ["java","-jar","app.jar"]
