@@ -27,14 +27,13 @@
       <scope>test</scope>
     </dependency>
 
-<!-- Spark Java lightweight web framework -->
-<dependency>
-  <groupId>com.sparkjava</groupId>
-        <artifactId>spark-core</artifactId>
-        <version>2.9.4</version>
+    <!-- Spark Java lightweight web framework -->
+    <dependency>
+      <groupId>com.sparkjava</groupId>
+      <artifactId>spark-core</artifactId>
+      <version>2.9.4</version>
     </dependency>
-</dependencies>
-    
+
     <!-- (Optional) Add Spring Boot or any other framework here -->
   </dependencies>
 
@@ -46,33 +45,4 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
-        </configuration>
-      </plugin>
-
-      <!-- Shade Plugin for creating fat jar -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.4.1</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <createDependencyReducedPom>false</createDependencyReducedPom>
-              <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>com.example.microservice.App</mainClass>
-                </transformer>
-              </transformers>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-</project>
+          <source>${maven.comp
