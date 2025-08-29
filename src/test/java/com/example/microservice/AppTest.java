@@ -7,7 +7,7 @@ public class AppTest {
 
     @Test
     public void testGreet() {
-        App app = new App();  // refers to com.example.microservice.App
+        App app = new App();
         String expected = "Hello, DevOps Engineer!";
         assertEquals(expected, app.greet());
     }
