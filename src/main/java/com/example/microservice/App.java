@@ -1,4 +1,4 @@
-package com.example.microservice;
+package com.growingflowers.app;
 
 public class App {
     public static void main(String[] args) {
