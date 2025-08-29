@@ -1,48 +1,37 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<build>
+  <plugins>
+    <!-- Compiler Plugin -->
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.8.1</version>
+      <configuration>
+        <source>${maven.compiler.source}</source>
+        <target>${maven.compiler.target}</target>
+      </configuration>
+    </plugin>
 
-  <groupId>com.growingflowers</groupId>
-  <artifactId>microservice-app</artifactId>
-  <version>1.0.0</version>
-  <packaging>jar</packaging>
-
-  <name>Microservice App</name>
-  <description>A sample Java microservice app to build and Dockerize with Jenkins</description>
-
-  <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-  <dependencies>
-    <!-- JUnit for Testing -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- Spark Java lightweight web framework -->
-    <dependency>
-      <groupId>com.sparkjava</groupId>
-      <artifactId>spark-core</artifactId>
-      <version>2.9.4</version>
-    </dependency>
-
-    <!-- (Optional) Add Spring Boot or any other framework here -->
-  </dependencies>
-
-  <build>
-    <plugins>
-      <!-- Compiler Plugin -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <source>${maven.comp
+    <!-- Shade Plugin for creating fat jar -->
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-shade-plugin</artifactId>
+      <version>3.4.1</version>
+      <executions>
+        <execution>
+          <phase>package</phase>
+          <goals>
+            <goal>shade</goal>
+          </goals>
+          <configuration>
+            <createDependencyReducedPom>false</createDependencyReducedPom>
+            <transformers>
+              <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                <mainClass>com.example.microservice.App</mainClass>
+              </transformer>
+            </transformers>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
