@@ -8,11 +8,12 @@ public class App {
         port(9000);
 
         // Define a simple GET endpoint
-        get("/", (req, res) -> {
-            return "Hello from Microservice App!";
-        });
+        get("/", (req, res) -> "Hello from Microservice App!");
 
         System.out.println("Microservice App is running on port 9000...");
+
+        // Keep Spark server alive
+        awaitInitialization();
     }
 
     // For testing
